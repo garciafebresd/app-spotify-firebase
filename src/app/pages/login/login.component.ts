@@ -24,10 +24,12 @@ export class LoginComponent implements OnInit {
     if (formRegistro.invalid) { return; }
 
     Swal.fire({
-      allowOutsideClick: false,
-      type: 'info',
-      text: 'Espere por favor'
+      title: 'Cargando',
+      text: 'Espere por favor',
+      icon: 'info',
+      allowOutsideClick: false
     });
+
     Swal.showLoading();
 
     this.authService.login(this.usuario).subscribe(response => {
@@ -38,9 +40,9 @@ export class LoginComponent implements OnInit {
       console.log(err.error.error.message);
 
       Swal.fire({
-        type: 'error',
         title: 'Error al autenticar',
-        text: 'Email o password invalidos'
+        text: 'Email o password invalidos',
+        icon: 'error'
       });
     });
   }

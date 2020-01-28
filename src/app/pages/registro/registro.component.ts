@@ -26,10 +26,12 @@ export class RegistroComponent implements OnInit {
     if (formRegistro.invalid) { return; }
 
     Swal.fire({
-      allowOutsideClick: false,
-      type: 'info',
-      text: 'Espere por favor...'
+      title: 'Cargando',
+      text: 'Espere por favor',
+      icon: 'info',
+      allowOutsideClick: false
     });
+
     Swal.showLoading();
 
 
@@ -42,10 +44,11 @@ export class RegistroComponent implements OnInit {
       console.log(err.error.error.message);
 
       Swal.fire({
-        type: 'error',
         title: 'Error al registrar',
-        text: err.error.error.message
+        text: err.error.error.message,
+        icon: 'error'
       });
+
     });
 
   }
