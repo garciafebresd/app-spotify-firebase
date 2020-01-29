@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { UserModel } from 'src/app/models/user.model';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -12,11 +14,18 @@ import Swal from 'sweetalert2';
 export class LoginComponent implements OnInit {
 
   usuario: UserModel;
+  remember = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.usuario = new UserModel();
+
+    if (localStorage.getItem('email')) {
+      this.usuario.email = localStorage.getItem('email');
+      this.remember = true;
+    }
   }
 
   login(formRegistro: NgForm) {
@@ -35,6 +44,12 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.usuario).subscribe(response => {
 
       Swal.close();
+
+      if (this.remember) {
+        localStorage.setItem('email', this.usuario.email);
+      }
+
+      this.router.navigateByUrl('/home');
 
     }, (err) => {
       console.log(err.error.error.message);

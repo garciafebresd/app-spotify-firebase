@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   private url = 'https://identitytoolkit.googleapis.com/v1/accounts:';
-  private API_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXX';
+  private API_KEY = 'AIzaSyDQDoNn3swVlrNokqOL-Q8EcfevvBiwQxg';
   private fireToken: string;
 
   constructor(private http: HttpClient) {
@@ -47,13 +47,38 @@ export class AuthService {
 
 
   logout() {
+    localStorage.removeItem('fireToken');
+  }
+
+  isAuthenticated(): boolean {
+
+    if (this.fireToken.length < 2) {
+      return false;
+    }
+
+    const expiresAt = Number(localStorage.getItem('expiresAt'));
+    const expired = new Date();
+    expired.setTime(expiresAt);
+    const now = new Date();
+
+    if (expired > now) {
+      return true;
+    } else {
+      return false;
+    }
 
   }
+
 
   private setToken(idToken: string) {
 
     this.fireToken = idToken;
     localStorage.setItem('fireToken', idToken);
+
+    const today = new Date();
+    today.setSeconds(3600);
+    localStorage.setItem('expiresAt', today.getTime().toString());
+
   }
 
   private getToken() {

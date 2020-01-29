@@ -3,6 +3,7 @@ import { UserModel } from '../../models/user.model';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -12,8 +13,10 @@ import Swal from 'sweetalert2';
 export class RegistroComponent implements OnInit {
 
   usuario: UserModel;
+  remember = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
 
@@ -35,9 +38,15 @@ export class RegistroComponent implements OnInit {
     Swal.showLoading();
 
 
-    this.authService.register( this.usuario ).subscribe(response => {
+    this.authService.register(this.usuario).subscribe(response => {
 
       Swal.close();
+
+      if (this.remember) {
+        localStorage.setItem('email', this.usuario.email);
+      }
+
+      this.router.navigateByUrl('/home');
 
     }, (err) => {
 
