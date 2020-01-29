@@ -1,8 +1,5 @@
-<div class="m-5">
-    <h1>Home App</h1>
-    <hr />
+<app-loader *ngIf="loader"></app-loader>
 
-    <button class="btn btn-outline-danger" (click)="exit()">
-      Salir
-    </button>
-</div>
+<app-error [messageError]="messageError" *ngIf="error"></app-error>
+
+<app-card *ngIf="!loader && !error" [items]="newReleases"></app-card>

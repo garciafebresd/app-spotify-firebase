@@ -1,0 +1,11 @@
+<div class="row m-b-5">
+    <div class="col m-t-5">
+        <input #termino type="text" (keyup)="buscar(termino.value)" class="form-control" placeholder="Buscar artista...">
+    </div>
+</div>
+
+<app-loader *ngIf="loader"></app-loader>
+
+<app-error [messageError]="messageError" *ngIf="error"></app-error>
+
+<app-card *ngIf="!loader && !error" [items]="artists"></app-card>
