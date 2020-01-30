@@ -13,17 +13,42 @@ export class SpotifyService {
   artist: any[] = [];
   artists: any[] = [];
 
+  spotifyToken: string;
+  private clientId = '3199dea3555e4b82a137022fe8966597';
+  private refreshToken = '5f47a928923d47019b4a0a92a6a81a60';
 
   constructor(private httpClient: HttpClient) {
 
     console.log('servicio spotify funcionando ');
   }
 
+  getToken() {
+
+    const url = `https://node-request.herokuapp.com/spotify/${this.clientId}/${this.refreshToken}`;
+    return this.httpClient.get(url, { }).pipe(
+      map(response => {
+
+        this.setToken(response['access_token']);
+        return response;
+
+      })
+    );
+
+  }
+
+  setToken(accessToken: string) {
+    this.spotifyToken = accessToken;
+    localStorage.setItem('spotifyToken', accessToken);
+
+    const today = new Date();
+    today.setSeconds(3600);
+    localStorage.setItem('spotifyExpiresAt', today.getTime().toString());
+  }
 
   getQueryUrl(query: string) {
 
     const headers = new HttpHeaders({
-      Authorization: 'Bearer BQBbHGRv7jQJdp8bMbfr-PjlRuoVXN_PDC7wwf2_5awV8gt196PvWQ1fbFL-YfUuWcFBxBoYZGz2V5nduC8'
+      Authorization: `Bearer ${this.spotifyToken}`
     });
     const url = `https://api.spotify.com/v1/${query}`;
     return this.httpClient.get(url, { headers });

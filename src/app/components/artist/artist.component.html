@@ -26,10 +26,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="text-white">Foto</th>
-                    <th class="text-white">Album</th>
-                    <th class="text-white">Canción</th>
-                    <th class="text-white">Vista Previa</th>
+                    <th>Foto</th>
+                    <th>Album</th>
+                    <th>Canción</th>
+                    <th>Vista Previa</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,8 +37,8 @@
                     <td>
                         <img class="img-thumb" [src]="track.album.images | noimage" alt="">
                     </td>
-                    <td class="text-white">{{ track.album.name }}</td>
-                    <td class="text-white">{{ track.name }}</td>
+                    <td>{{ track.album.name }}</td>
+                    <td>{{ track.name }}</td>
                     <td>
                         <iframe [src]="track.uri | domseguro" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </td>

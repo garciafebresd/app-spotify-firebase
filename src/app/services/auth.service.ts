@@ -48,6 +48,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('fireToken');
+    localStorage.removeItem('spotifyToken');
   }
 
   isAuthenticated(): boolean {
