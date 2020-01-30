@@ -3,10 +3,10 @@
 <app-error [messageError]="messageError" *ngIf="error"></app-error>
 
 <div *ngIf="!loader && !error" class="row animated fadeIn">
-    <div class="col-2">
+    <div class="col-2 m-3">
         <img [src]="artist.images | noimage" alt="" class="img-thumbnail img-circle">
     </div>
-    <div class="col">
+    <div class="col m-3">
         <h3>{{ artist.name }}</h3>
         <p>
             <a [href]="artist.external_urls.spotify" target="_blank">
@@ -14,7 +14,7 @@
             </a>
         </p>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-4 text-right m-3">
         <button [routerLink]="['/search']" class="btn btn-outline-danger">
             Regresar
         </button>

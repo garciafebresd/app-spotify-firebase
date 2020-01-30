@@ -36,11 +36,4 @@ export class HomeComponent {
     });
   }
 
-  exit() {
-
-    this.authService.logout();
-    this.router.navigateByUrl('/login');
-
-  }
-
 }

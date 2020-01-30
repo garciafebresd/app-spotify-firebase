@@ -17,6 +17,8 @@ import { CardComponent } from './components/shared/card/card.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
 import { ArtistComponent } from './components/artist/artist.component';
 import { SearchComponent } from './components/search/search.component';
+import { ErrorComponent } from './components/shared/error/error.component';
+
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { SearchComponent } from './components/search/search.component';
     SearchComponent,
     CardComponent,
     LoaderComponent,
+    ErrorComponent,
     //Pipes
     NoimagePipe,
     DomseguroPipe
